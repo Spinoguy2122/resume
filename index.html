@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder | Professional CV</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eef1f6;
+            color: #243047;
+        }
+
+        header {
+            background: #172554;
+            color: white;
+            padding: 22px 7%;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        header p {
+            margin-bottom: 0;
+            color: #c7d2fe;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(300px, 1fr) minmax(320px, 1fr);
+            gap: 25px;
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+            align-items: start;
+        }
+
+        .panel {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 20px #17255410;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #172554;
+        }
+
+        h3 {
+            color: #334155;
+            margin-top: 25px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin: 14px 0 6px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font: inherit;
+        }
+
+        textarea {
+            min-height: 85px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: 2px solid #818cf8;
+            border-color: #6366f1;
+        }
+
+        .primary-btn {
+            margin-top: 20px;
+            padding: 13px 20px;
+            border: none;
+            border-radius: 6px;
+            background: #4f46e5;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .primary-btn:hover {
+            background: #3730a3;
+        }
+
+        .resume {
+            background: white;
+            border-top: 8px solid #4f46e5;
+            padding: 35px;
+            min-height: 700px;
+            box-shadow: 0 5px 25px #17255415;
+            overflow-wrap: anywhere;
+        }
+
+        .resume-header {
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .resume-header h1 {
+            font-size: 32px;
+            color: #172554;
+            margin: 0 0 8px;
+        }
+
+        .job-title {
+            color: #4f46e5;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .contact {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #64748b;
+        }
+
+        .resume-section {
+            margin-top: 25px;
+        }
+
+        .resume-section h3 {
+            color: #4f46e5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        .resume-section p {
+            line-height: 1.7;
+            white-space: pre-line;
+            color: #475569;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill {
+            background: #eef2ff;
+            color: #3730a3;
+            padding: 7px 10px;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 850px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            header,
+            .form-panel,
+            .print-btn {
+                display: none !important;
+            }
+
+            .layout {
+                display: block;
+                margin: 0;
+                padding: 0;
+            }
+
+            .panel {
+                padding: 0;
+                box-shadow: none;
+            }
+
+            .resume {
+                border-top: 5px solid #4f46e5;
+                box-shadow: none;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>ResumeCraft</h1>
+        <p>Build a professional resume that makes a great first impression.</p>
+    </header>
+
+    <main class="layout">
+        <section class="panel form-panel">
+            <h2>Resume Details</h2>
+            <p>Complete the fields below to customize your resume.</p>
+
+            <form method="POST">
+                <h3>Personal Information</h3>
+
+                <label for="name">Full Name</label>
+                <input id="name" name="name" value="{{ resume.name }}" required>
+
+                <label for="job_title">Professional Title</label>
+                <input id="job_title" name="job_title" value="{{ resume.job_title }}">
+
+                <label for="email">Email Address</label>
+                <input id="email" name="email" type="email" value="{{ resume.email }}">
+
+                <label for="phone">Phone Number</label>
+                <input id="phone" name="phone" value="{{ resume.phone }}">
+
+                <label for="location">Location</label>
+                <input id="location" name="location" value="{{ resume.location }}">
+
+                <label for="summary">Professional Summary</label>
+                <textarea id="summary" name="summary">{{ resume.summary }}</textarea>
+
+                <h3>Education</h3>
+
+                <label for="education">Degree or Qualification</label>
+                <input id="education" name="education" value="{{ resume.education }}">
+
+                <label for="university">School or University</label>
+                <input id="university" name="university" value="{{ resume.university }}">
+
+                <h3>Work Experience</h3>
+
+                <label for="experience">Job Title and Company</label>
+                <input id="experience" name="experience" value="{{ resume.experience }}">
+
+                <label for="experience_details">Responsibilities and Achievements</label>
+                <textarea id="experience_details" name="experience_details">{{ resume.experience_details }}</textarea>
+
+                <h3>Skills</h3>
+
+                <label for="skills">Skills (separate with commas)</label>
+                <textarea id="skills" name="skills">{{ resume.skills }}</textarea>
+
+                <button class="primary-btn" type="submit">
+                    Update Resume Preview
+                </button>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Resume Preview</h2>
+
+            <button class="primary-btn print-btn" type="button" onclick="window.print()">
+                Download / Print PDF
+            </button>
+
+            <article class="resume">
+                <div class="resume-header">
+                    <h1>{{ resume.name or "Your Name" }}</h1>
+                    <div class="job-title">
+                        {{ resume.job_title or "Professional Title" }}
+                    </div>
+                    <div class="contact">
+                        {{ resume.email }}
+                        {% if resume.phone %} | {{ resume.phone }}{% endif %}
+                        {% if resume.location %} | {{ resume.location }}{% endif %}
+                    </div>
+                </div>
+
+                <section class="resume-section">
+                    <h3>Professional Summary</h3>
+                    <p>{{ resume.summary or "Add your professional summary here." }}</p>
+                </section>
+
+                <section class="resume-section">
+                    <h3>Work Experience</h3>
+                    <strong>{{ resume.experience }}</strong>
+                    <p>{{ resume.experience_details }}</p>
+                </section>
+
+                <section class="resume-section">
+                    <h3>Education</h3>
+                    <strong>{{ resume.education }}</strong>
+                    <p>{{ resume.university }}</p>
+                </section>
+
+                <section class="resume-section">
+                    <h3>Skills</h3>
+                    <div class="skills">
+                        {% for skill in resume.skills.split(',') %}
+                        {% if skill.strip() %}
+                        <span class="skill">{{ skill.strip() }}</span>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </section>
+            </article>
+        </section>
+    </main>
+</body>
+
+</html>
